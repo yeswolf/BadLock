@@ -3,20 +3,16 @@ package com.yeswolf.badlock
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.DownloadManager
-import android.content.*
+import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Text
-import androidx.compose.foundation.layout.RowScope.gravity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.core.app.ActivityCompat
 import com.yeswolf.badlock.model.Plugin
+import com.yeswolf.badlock.model.Version
 import com.yeswolf.badlock.model.plugins
 import com.yeswolf.badlock.network.ApkMirror
 import com.yeswolf.badlock.network.DownloadResultReceiver
@@ -43,11 +39,35 @@ class MainActivity : AppCompatActivity() {
             DownloadResultReceiver(viewModel),
             IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
         )
+        val filter = IntentFilter("android.intent.action.PACKAGE_INSTALL")
+        filter.addAction("android.intent.action.PACKAGE_ADDED")
+        filter.addAction("android.intent.action.PACKAGE_REMOVED")
+        filter.addDataScheme("package");
+
+        applicationContext.registerReceiver(
+            InstallResultReceiver(viewModel),
+            filter
+        )
+
+
         viewModel.onLoadingUpdated(true)
         setContent {
             MainList(items = viewModel.items, viewModel.loading, viewModel::onLoadingUpdated)
         }
         Observable.fromCallable {
+            plugins.forEach {
+                try {
+                    it.installedVersion = Version(
+                        baseContext.packageManager.getPackageInfo(
+                            it.packageName,
+                            0
+                        ).versionName, ""
+                    )
+                } catch (e: PackageManager.NameNotFoundException) {
+                    print("no version found")
+                }
+            }
+            viewModel.items = plugins
             plugins = plugins.map { ApkMirror.versionInfo(it) } as ArrayList<Plugin>
         }
             .subscribeOn(Schedulers.io())

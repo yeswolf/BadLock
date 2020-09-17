@@ -19,12 +19,17 @@ class ApkMirror {
 
         fun versionHTMLDownloadURL(plugin: Plugin, version: Version): String {
             val versionPart = version.defised()
-            return "$apkMirrorURL/apk/${plugin.serverRoot}/${plugin.serverRoot}-${versionPart}-release/${plugin.vendor.toLowerCase()}-${
-                plugin.name.toLowerCase().replace(
-                    " ",
-                    "-"
+            var url = "$apkMirrorURL${version.url}"
+            if (plugin.serverRoot != "nice-catch" && plugin.serverRoot != "soundassistant" && plugin.serverRoot != "home-up" && plugin.serverRoot != "pentastic") {
+                url += "${plugin.vendor.toLowerCase()}-"
+            }
+            url += "${
+                plugin.serverRoot.replace(
+                    "samsung-",
+                    ""
                 )
             }-${versionPart}-android-apk-download/download/"
+            return url
         }
 
         fun versionDirectDownloadURL(plugin: Plugin, version: Version): String {
@@ -50,12 +55,12 @@ class ApkMirror {
                     it.attr("href").contains("/apk")
                 }
                 .map {
-                    it.text()
+                    Pair(it.text(), it.attr("href"))
                 }
             plugin.versions = versionNames.map {
-                val parts = it.split(" ")
+                val parts = it.first.replace("(READ NOTES)", "").trim().split(" ")
                 val versionPart = parts.last()
-                Version(versionPart)
+                Version(versionPart, it.second)
             }.toTypedArray()
             return plugin
         }

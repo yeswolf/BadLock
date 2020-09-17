@@ -5,7 +5,9 @@ data class Plugin(
     var serverRoot: String,
     var icon: Int = 0,
     var packageName: String = "",
-    var description: String = ""
+    val className: String,
+    var description: String = "",
+    var installedVersion: Version? = null
 ) {
     var versions: Array<Version> = arrayOf()
     val url: String = ""

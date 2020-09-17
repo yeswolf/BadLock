@@ -2,7 +2,7 @@ package com.yeswolf.badlock.model
 
 import kotlin.math.max
 
-class Version(version: String) : Comparable<Version> {
+class Version(version: String, var url: String) : Comparable<Version> {
     var intParts: Array<Int> = arrayOf()
     var stringParts: Array<String> = arrayOf()
     var string: String = version

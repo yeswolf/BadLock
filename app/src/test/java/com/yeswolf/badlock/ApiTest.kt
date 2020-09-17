@@ -13,10 +13,9 @@ class ApiTest {
     @Test
     fun testPluginUrls() {
         plugins.forEach {
-            var plug = ApkMirror.versionInfo(it)
-//            val latestVersionDownloadURL = ApkMirror.latestVersionDirectDownloadURL(plug)
-            val pluginUrl = ApkMirror.pluginURL(plug)
-            println(pluginUrl)
+            var plugin = ApkMirror.versionInfo(it)
+            val latestVersionDownloadURL2 = ApkMirror.latestVersionDirectDownloadURL(plugin)
+            println(latestVersionDownloadURL2)
         }
 
     }
