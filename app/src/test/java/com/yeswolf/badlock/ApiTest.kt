@@ -1,7 +1,7 @@
 package com.yeswolf.badlock
 
 import com.yeswolf.badlock.model.plugins
-import com.yeswolf.badlock.network.ApkMirror
+import com.yeswolf.badlock.apkmirror.data.ApkMirror
 import org.junit.Test
 
 /**

@@ -12,3 +12,4 @@ fun packageExists(targetPackage: String?, context: Context): Boolean {
     }
     return true
 }
+

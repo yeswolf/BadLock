@@ -1,4 +1,4 @@
-package com.yeswolf.badlock.network
+package com.yeswolf.badlock.apkmirror.data
 
 import com.yeswolf.badlock.model.Plugin
 import com.yeswolf.badlock.model.Version
@@ -7,8 +7,7 @@ import com.yeswolf.badlock.model.samsungCategory
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-class ApkMirror {
-    companion object {
+object ApkMirror {
         fun pluginURL(plugin: Plugin): String {
             return "$apkMirrorURL/apk/$samsungCategory/${plugin.serverRoot}"
         }
@@ -74,4 +73,3 @@ class ApkMirror {
                 .get()
         }
     }
-}
