@@ -1,4 +1,4 @@
-package com.seagate.tote.common.arch
+package com.yeswolf.badlock
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

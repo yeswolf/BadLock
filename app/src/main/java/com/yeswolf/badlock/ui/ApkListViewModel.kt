@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.seagate.tote.common.arch.SingleLiveData
+import com.yeswolf.badlock.SingleLiveData
 import com.yeswolf.badlock.apkmirror.domain.UpdateVersionInfoUseCase
 import com.yeswolf.badlock.model.Plugin
 import com.yeswolf.badlock.model.plugins
