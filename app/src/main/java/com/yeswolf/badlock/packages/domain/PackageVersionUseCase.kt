@@ -7,6 +7,6 @@ import toothpick.InjectConstructor
 class PackageVersionUseCase(
     private val packagesRepository: IPackagesRepository
 ) {
-    operator fun invoke(packageName: String): Version =
+    operator fun invoke(packageName: String): Version? =
         packagesRepository.getPackageVersion(packageName)
 }

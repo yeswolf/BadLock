@@ -10,12 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
 import androidx.core.app.ActivityCompat
 import com.yeswolf.badlock.di.Scopes
-import com.yeswolf.badlock.network.DownloadResultReceiver
-import com.yeswolf.badlock.ui.ApkListViewModel
+import com.yeswolf.badlock.receivers.DownloadResultReceiver
+import com.yeswolf.badlock.receivers.InstallResultReceiver
 import com.yeswolf.badlock.ui.MainList
-import com.yeswolf.badlock.ui.provideViewModel
+import com.yeswolf.badlock.ui.viewmodel.ApkListViewModel
+import com.yeswolf.badlock.ui.viewmodel.provideViewModel
 import toothpick.ktp.KTP
-
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: ApkListViewModel by lazy {
@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
             { KTP.openScope(Scopes.APP) }
         )
     }
-
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +42,9 @@ class MainActivity : AppCompatActivity() {
         filter.addAction("android.intent.action.PACKAGE_ADDED")
         filter.addAction("android.intent.action.PACKAGE_REMOVED")
         filter.addDataScheme("package")
-
+        val installResultReceiver = InstallResultReceiver(viewModel)
         applicationContext.registerReceiver(
-            InstallResultReceiver(viewModel),
+            installResultReceiver,
             filter
         )
 

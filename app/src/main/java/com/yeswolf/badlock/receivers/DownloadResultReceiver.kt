@@ -1,4 +1,4 @@
-package com.yeswolf.badlock.network
+package com.yeswolf.badlock.receivers
 
 import android.app.DownloadManager
 import android.content.ActivityNotFoundException
@@ -8,11 +8,10 @@ import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.widget.Toast
-import androidx.compose.ui.viewinterop.viewModel
 import androidx.core.content.FileProvider
 import androidx.core.net.toFile
-import com.yeswolf.badlock.ui.ApkListViewModel
-
+import com.yeswolf.badlock.ui.viewmodel.ApkListViewModel
+//FIXME: this is all wrong. We'd better download it to app cache folder
 class DownloadResultReceiver(var viewModel: ApkListViewModel) : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val action = intent?.action

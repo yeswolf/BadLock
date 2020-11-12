@@ -21,8 +21,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
-import com.yeswolf.badlock.model.Plugin
 import com.yeswolf.badlock.apkmirror.data.ApkMirror
+import com.yeswolf.badlock.model.Plugin
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -51,7 +51,7 @@ fun MainList(
             }
             Column(
                 modifier = Modifier.padding(5.dp)
-                    .gravity(Alignment.CenterVertically)
+                    .align(Alignment.CenterVertically)
             ) {
                 Text(text = it.name)
                 if (plugin.installedVersion != null) {
@@ -61,10 +61,10 @@ fun MainList(
             Column(
                 modifier = Modifier.padding(5.dp)
                     .fillMaxWidth()
-                    .fillMaxSize().gravity(Alignment.CenterVertically),
-                horizontalGravity = Alignment.End,
+                    .fillMaxSize().align(Alignment.CenterVertically),
+                horizontalAlignment = Alignment.End,
             ) {
-                if (plugin.versionsLoaded()) {
+                if (plugin.versionsLoaded) {
                     val newVersion = plugin.versions.first()
                     var text = ""
                     var showButton = false
@@ -90,11 +90,11 @@ fun MainList(
                                         context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
                                     request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE)
                                     request.setAllowedOverRoaming(false)
-                                    request.setTitle("Downloading ${plugin.latestVersionApkName()}")
-                                    request.setDescription("Downloading ${plugin.latestVersionApkName()}")
+                                    request.setTitle("Downloading ${plugin.apkName}")
+                                    request.setDescription("Downloading ${plugin.apkName}")
                                     request.setDestinationInExternalPublicDir(
                                         Environment.DIRECTORY_DOWNLOADS,
-                                        plugin.latestVersionApkName()
+                                        plugin.apkName
                                     )
                                     request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION)
                                     downloadManager.enqueue(request)

@@ -9,16 +9,15 @@ data class Plugin(
     var description: String = "",
     var installedVersion: Version? = null
 ) {
-    var versions: Array<Version> = arrayOf()
-    val url: String = ""
-    var vendor = "Samsung"
+    var versions: Array<Version> = emptyArray()
     var loading = false
-    fun latestVersionApkName(): String {
-        val latestVersion = versions.first()
-        return "$name $latestVersion.apk"
-    }
+    val apkName: String
+        get() {
+            return "$name ${versions.first()}.apk"
+        }
 
-    fun versionsLoaded(): Boolean {
-        return !versions.isEmpty()
-    }
+    val versionsLoaded: Boolean
+        get() {
+            return versions.isNotEmpty()
+        }
 }

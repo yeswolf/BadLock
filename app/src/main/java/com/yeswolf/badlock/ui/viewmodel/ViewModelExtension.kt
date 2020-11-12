@@ -1,4 +1,4 @@
-package com.yeswolf.badlock.ui
+package com.yeswolf.badlock.ui.viewmodel
 
 import android.os.Bundle
 import androidx.lifecycle.*

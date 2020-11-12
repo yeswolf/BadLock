@@ -9,6 +9,11 @@ class PackagesRepository(
     private val packagesSource: PackagesSource
 ) : IPackagesRepository {
 
-    override fun getPackageVersion(packageName: String): Version =
-        Version(packagesSource.getPackageVersionName(packageName), "")
+    override fun getPackageVersion(packageName: String): Version? {
+        return try {
+            Version(packagesSource.getPackageVersionName(packageName), "")
+        } catch (e: Exception) {
+            null
+        }
+    }
 }

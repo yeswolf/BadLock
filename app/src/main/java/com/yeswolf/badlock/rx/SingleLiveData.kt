@@ -1,4 +1,4 @@
-package com.yeswolf.badlock
+package com.yeswolf.badlock.rx
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
