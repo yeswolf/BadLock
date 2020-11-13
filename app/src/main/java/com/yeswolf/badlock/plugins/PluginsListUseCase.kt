@@ -1,6 +1,6 @@
 package com.yeswolf.badlock.plugins
 
-import com.yeswolf.badlock.model.Plugin
+import com.yeswolf.badlock.plugins.data.Plugin
 import com.yeswolf.badlock.packages.domain.IPackagesRepository
 import com.yeswolf.badlock.plugins.domain.IPluginsRepository
 import io.reactivex.rxjava3.core.Single

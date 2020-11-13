@@ -22,7 +22,7 @@ import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
 import com.yeswolf.badlock.apkmirror.data.ApkMirrorSource
-import com.yeswolf.badlock.model.Plugin
+import com.yeswolf.badlock.plugins.data.Plugin
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers

@@ -1,4 +1,6 @@
-package com.yeswolf.badlock.model
+package com.yeswolf.badlock.plugins.data
+
+import com.yeswolf.badlock.apkmirror.domain.Version
 
 data class Plugin(
     val name: String,
@@ -9,7 +11,7 @@ data class Plugin(
     val description: String = "",
     val installedVersion: Version? = null
 ) {
-    var versions: Array<Version> = emptyArray()
+    var versions: List<Version> = emptyList()
     var loading = false
     val apkName: String
         get() {

@@ -1,7 +1,6 @@
 package com.yeswolf.badlock.plugins.data
 
 import com.yeswolf.badlock.R
-import com.yeswolf.badlock.model.Plugin
 import toothpick.InjectConstructor
 
 @InjectConstructor

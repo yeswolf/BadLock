@@ -1,7 +1,7 @@
 package com.yeswolf.badlock.apkmirror.data
 
-import com.yeswolf.badlock.model.Plugin
-import com.yeswolf.badlock.model.Version
+import com.yeswolf.badlock.plugins.data.Plugin
+import com.yeswolf.badlock.apkmirror.domain.Version
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
@@ -46,7 +46,7 @@ object ApkMirrorSource {
         return versionDirectDownloadURL(plugin, plugin.versions.first())
     }
 
-    fun getPluginVersions(plugin: Plugin): Array<VersionData> {
+    fun getPluginVersions(plugin: Plugin): List<VersionData> {
         val pluginURL = pluginURL(plugin)
         val doc = documentFromURL(pluginURL)
         return doc.select(".listWidget").first {
@@ -61,7 +61,6 @@ object ApkMirrorSource {
                     it.attr("href")
                 )
             }
-            .toTypedArray()
     }
 
     private fun documentFromURL(pluginURL: String): Document {

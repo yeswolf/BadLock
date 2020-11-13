@@ -4,7 +4,6 @@ import com.yeswolf.badlock.apkmirror.data.ApkMirrorRepository
 import com.yeswolf.badlock.apkmirror.data.ApkMirrorSource
 import com.yeswolf.badlock.packages.mappers.VersionMapper
 import com.yeswolf.badlock.plugins.data.PluginsListSource
-import com.yeswolf.badlock.plugins.data.PluginsRepository
 import org.junit.Test
 
 /**

@@ -1,18 +1,18 @@
-package com.yeswolf.badlock.model
+package com.yeswolf.badlock.apkmirror.domain
 
 import kotlin.math.max
 
 data class Version(
-    var url: String = "",
-    var parts: Array<String> = emptyArray()
+    val url: String = "",
+    val parts: List<String> = emptyList()
 ) : Comparable<Version> {
 
     fun dotted(): String {
-        return parts.joinToString(".") { it.toString() }
+        return parts.joinToString(".")
     }
 
     fun defised(): String {
-        return parts.joinToString("-") { it.toString() }
+        return parts.joinToString("-")
     }
 
     override fun toString(): String {
@@ -20,8 +20,8 @@ data class Version(
     }
 
     override fun compareTo(other: Version): Int {
-        val thisParts: Array<Int> = this.parts.map { it.toInt() }.toTypedArray()
-        val thatParts: Array<Int> = other.parts.map { it.toInt() }.toTypedArray()
+        val thisParts: List<Int> = this.parts.map { it.toInt() }
+        val thatParts: List<Int> = other.parts.map { it.toInt() }
         val length = max(thisParts.size, thatParts.size)
         for (i in 0 until length) {
             val thisPart = if (i < thisParts.size) thisParts[i] else 0

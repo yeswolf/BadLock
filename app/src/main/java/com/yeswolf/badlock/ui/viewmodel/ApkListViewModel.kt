@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.yeswolf.badlock.ISchedulersProvider
 import com.yeswolf.badlock.apkmirror.domain.GetPluginVersionsUseCase
-import com.yeswolf.badlock.model.Plugin
+import com.yeswolf.badlock.plugins.data.Plugin
 import com.yeswolf.badlock.plugins.PluginsListUseCase
 import com.yeswolf.badlock.rx.SingleLiveData
 import io.reactivex.rxjava3.core.Observable
