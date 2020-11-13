@@ -5,7 +5,7 @@ import com.yeswolf.badlock.model.Version
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-object ApkMirror {
+object ApkMirrorSource {
     private const val APK_MIRROR_URL = "https://www.apkmirror.com"
     private const val SAMSUNG_CATEGORY = "samsung-electronics-co-ltd"
     private const val VENDOR = "samsung"
@@ -46,24 +46,22 @@ object ApkMirror {
         return versionDirectDownloadURL(plugin, plugin.versions.first())
     }
 
-    fun versionInfo(plugin: Plugin): Plugin {
+    fun getPluginVersions(plugin: Plugin): Array<VersionData> {
         val pluginURL = pluginURL(plugin)
         val doc = documentFromURL(pluginURL)
-        val versionNames = doc.select(".listWidget").first {
+        return doc.select(".listWidget").first {
             it.select(".widgetHeader").text().contains("All versions")
         }.select(".fontBlack")
             .filter {
                 it.attr("href").contains("/apk")
             }
             .map {
-                Pair(it.text(), it.attr("href"))
+                VersionData(
+                    it.text().replace("(READ NOTES)", "").trim().split(" ").last(),
+                    it.attr("href")
+                )
             }
-        plugin.versions = versionNames.map {
-            val parts = it.first.replace("(READ NOTES)", "").trim().split(" ")
-            val versionPart = parts.last()
-            Version(versionPart, it.second)
-        }.toTypedArray()
-        return plugin
+            .toTypedArray()
     }
 
     private fun documentFromURL(pluginURL: String): Document {

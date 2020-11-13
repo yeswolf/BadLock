@@ -3,33 +3,25 @@ package com.yeswolf.badlock.model
 import kotlin.math.max
 
 data class Version(
-    val version: String,
-    var url: String = ""
+    var url: String = "",
+    var parts: Array<String> = emptyArray()
 ) : Comparable<Version> {
-    var intParts: Array<Int> = arrayOf()
-    var stringParts: Array<String> = arrayOf()
-    var string: String = version
-
-    init {
-        this.intParts = version.split(".").map { it.toInt() }.toTypedArray()
-        this.stringParts = version.split(".").toTypedArray()
-    }
 
     fun dotted(): String {
-        return stringParts.joinToString(".") { it }
+        return parts.joinToString(".") { it.toString() }
     }
 
     fun defised(): String {
-        return stringParts.joinToString("-") { it }
+        return parts.joinToString("-") { it.toString() }
     }
 
     override fun toString(): String {
-        return string
+        return dotted()
     }
 
     override fun compareTo(other: Version): Int {
-        val thisParts: Array<Int> = this.intParts
-        val thatParts: Array<Int> = other.intParts
+        val thisParts: Array<Int> = this.parts.map { it.toInt() }.toTypedArray()
+        val thatParts: Array<Int> = other.parts.map { it.toInt() }.toTypedArray()
         val length = max(thisParts.size, thatParts.size)
         for (i in 0 until length) {
             val thisPart = if (i < thisParts.size) thisParts[i] else 0

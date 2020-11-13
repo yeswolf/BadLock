@@ -1,7 +1,10 @@
 package com.yeswolf.badlock
 
-import com.yeswolf.badlock.model.plugins
-import com.yeswolf.badlock.apkmirror.data.ApkMirror
+import com.yeswolf.badlock.apkmirror.data.ApkMirrorRepository
+import com.yeswolf.badlock.apkmirror.data.ApkMirrorSource
+import com.yeswolf.badlock.packages.mappers.VersionMapper
+import com.yeswolf.badlock.plugins.data.PluginsListSource
+import com.yeswolf.badlock.plugins.data.PluginsRepository
 import org.junit.Test
 
 /**
@@ -12,12 +15,14 @@ import org.junit.Test
 class ApiTest {
     @Test
     fun testPluginUrls() {
-        plugins.forEach {
-            var plugin = ApkMirror.versionInfo(it)
-            val latestVersionDownloadURL2 = ApkMirror.latestVersionDirectDownloadURL(plugin)
-            println(latestVersionDownloadURL2)
+        //FIXME: of course, that's wrong, but we need to have at least something for now.
+        val source = PluginsListSource()
+        val apkMirrorRepository = ApkMirrorRepository(ApkMirrorSource, VersionMapper)
+        source.plugins.forEach {
+            it.versions = apkMirrorRepository.getPluginVersions(it)
+            val url = ApkMirrorSource.latestVersionDirectDownloadURL(it)
+            println(it.name + " " + url)
         }
-
     }
 
 }

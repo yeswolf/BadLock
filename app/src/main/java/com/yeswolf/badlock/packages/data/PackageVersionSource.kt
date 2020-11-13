@@ -1,18 +1,19 @@
 package com.yeswolf.badlock.packages.data
 
 import android.content.Context
+import com.yeswolf.badlock.apkmirror.data.VersionData
 import toothpick.InjectConstructor
 
 @InjectConstructor
 class PackageVersionSource(
     private val context: Context
 ) {
-    fun getPackageVersionName(packageName: String): String? =
+    fun getPackageVersion(packageName: String): VersionData? =
         try {
-            context.packageManager.getPackageInfo(
+            VersionData(context.packageManager.getPackageInfo(
                 packageName,
                 0
-            ).versionName
+            ).versionName)
         }catch (e: Exception){
             null
         }

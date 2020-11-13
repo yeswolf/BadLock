@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.yeswolf.badlock.ISchedulersProvider
-import com.yeswolf.badlock.apkmirror.domain.UpdateVersionInfoUseCase
+import com.yeswolf.badlock.apkmirror.domain.GetPluginVersionsUseCase
 import com.yeswolf.badlock.model.Plugin
 import com.yeswolf.badlock.plugins.PluginsListUseCase
 import com.yeswolf.badlock.rx.SingleLiveData
@@ -18,8 +18,8 @@ import toothpick.InjectConstructor
 
 @InjectConstructor
 class ApkListViewModel(
-    pluginsListUseCase: PluginsListUseCase,
-    private val updateVersionInfo: UpdateVersionInfoUseCase,
+    listPlugins: PluginsListUseCase,
+    private val getPluginVersions: GetPluginVersionsUseCase,
     schedulersProvider: ISchedulersProvider
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
@@ -34,10 +34,10 @@ class ApkListViewModel(
 
     init {
         compositeDisposable +=
-            pluginsListUseCase()
+            listPlugins()
                 .doOnSuccess { items = items + it }
                 .flatMapObservable { Observable.fromIterable(it) }
-                .doOnNext { updateVersionInfo(it) }
+                .doOnNext { it.versions = getPluginVersions(it) }
                 .observeOn(schedulersProvider.mainThread)
                 .subscribe({ it.loading = false },
                     {

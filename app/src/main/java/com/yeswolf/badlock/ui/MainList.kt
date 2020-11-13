@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
-import com.yeswolf.badlock.apkmirror.data.ApkMirror
+import com.yeswolf.badlock.apkmirror.data.ApkMirrorSource
 import com.yeswolf.badlock.model.Plugin
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -81,7 +81,7 @@ fun MainList(
                         Button(enabled = !plugin.loading, onClick = {
                             onUpdateItem(true, plugin)
                             Observable.fromCallable {
-                                ApkMirror.latestVersionDirectDownloadURL(plugin)
+                                ApkMirrorSource.latestVersionDirectDownloadURL(plugin)
                             }.subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
 
