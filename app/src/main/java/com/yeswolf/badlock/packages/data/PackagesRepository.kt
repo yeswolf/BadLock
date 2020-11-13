@@ -15,6 +15,6 @@ class PackagesRepository(
 
     override fun getPackageVersion(packageName: String): Version? =
         packageVersionSource.getPackageVersionName(packageName)
-            ?.let(versionMapper::toDto)
+            ?.let(versionMapper::fromDto)
 
 }
