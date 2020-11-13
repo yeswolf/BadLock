@@ -23,9 +23,7 @@ class InstallResultReceiver(
         if (intent != null) {
             viewModel.onLoadingUpdated(true)
             viewModel.items.toObservable()
-                .doOnNext {
-                    it.installedVersion = packageVersion(it.packageName)
-                }
+                .map { it.copy(installedVersion = packageVersion(it.packageName)) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()

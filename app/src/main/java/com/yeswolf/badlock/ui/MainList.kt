@@ -72,7 +72,7 @@ fun MainList(
                         text = "Install"
                         showButton = true
                     } else {
-                        if (newVersion.compareTo(plugin.installedVersion!!) == 1) {
+                        if (newVersion.compareTo(plugin.installedVersion) == 1) {
                             text = "Update"
                             showButton = true
                         }

@@ -4,6 +4,7 @@ import android.app.Application
 import com.facebook.stetho.Stetho
 import com.yeswolf.badlock.di.AppModule
 import com.yeswolf.badlock.di.NetworkModule
+import com.yeswolf.badlock.di.PluginsModule
 import com.yeswolf.badlock.di.Scopes
 import timber.log.Timber
 import toothpick.configuration.Configuration
@@ -23,6 +24,7 @@ class App : Application() {
         KTP.openScope(Scopes.APP)
             .installModules(
                 AppModule(this),
+                PluginsModule(),
                 NetworkModule()
             )
     }

@@ -1,13 +1,13 @@
 package com.yeswolf.badlock.model
 
 data class Plugin(
-    var name: String,
-    var serverRoot: String,
-    var icon: Int = 0,
-    var packageName: String = "",
+    val name: String,
+    val serverRoot: String,
+    val icon: Int = 0,
+    val packageName: String = "",
     val className: String,
-    var description: String = "",
-    var installedVersion: Version? = null
+    val description: String = "",
+    val installedVersion: Version? = null
 ) {
     var versions: Array<Version> = emptyArray()
     var loading = false

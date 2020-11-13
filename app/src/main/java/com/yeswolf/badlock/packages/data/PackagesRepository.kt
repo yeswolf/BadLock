@@ -2,18 +2,19 @@ package com.yeswolf.badlock.packages.data
 
 import com.yeswolf.badlock.model.Version
 import com.yeswolf.badlock.packages.domain.IPackagesRepository
+import com.yeswolf.badlock.packages.mappers.VersionMapper
 import toothpick.InjectConstructor
 
 @InjectConstructor
 class PackagesRepository(
-    private val packagesSource: PackagesSource
+    private val packageVersionSource: PackageVersionSource,
+    private val versionMapper: VersionMapper
 ) : IPackagesRepository {
 
-    override fun getPackageVersion(packageName: String): Version? {
-        return try {
-            Version(packagesSource.getPackageVersionName(packageName), "")
-        } catch (e: Exception) {
-            null
-        }
-    }
+
+
+    override fun getPackageVersion(packageName: String): Version? =
+        packageVersionSource.getPackageVersionName(packageName)
+            ?.let(versionMapper::toDto)
+
 }
