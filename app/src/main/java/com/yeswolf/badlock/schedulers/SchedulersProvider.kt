@@ -1,4 +1,4 @@
-package com.yeswolf.badlock
+package com.yeswolf.badlock.schedulers
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Scheduler

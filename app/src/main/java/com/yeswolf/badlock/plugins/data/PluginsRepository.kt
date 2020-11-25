@@ -1,6 +1,6 @@
 package com.yeswolf.badlock.plugins.data
 
-import com.yeswolf.badlock.ISchedulersProvider
+import com.yeswolf.badlock.schedulers.ISchedulersProvider
 import com.yeswolf.badlock.plugins.domain.IPluginsRepository
 import io.reactivex.rxjava3.core.Single
 import toothpick.InjectConstructor

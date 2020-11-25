@@ -5,11 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.yeswolf.badlock.ISchedulersProvider
 import com.yeswolf.badlock.apkmirror.domain.GetPluginVersionsUseCase
-import com.yeswolf.badlock.plugins.data.Plugin
 import com.yeswolf.badlock.plugins.PluginsListUseCase
+import com.yeswolf.badlock.plugins.data.Plugin
 import com.yeswolf.badlock.rx.SingleLiveData
+import com.yeswolf.badlock.schedulers.ISchedulersProvider
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.plusAssign
@@ -33,13 +33,14 @@ class ApkListViewModel(
         onErrorLiveData
 
     init {
+        onLoadingUpdated(true)
         compositeDisposable +=
             listPlugins()
                 .doOnSuccess { items = items + it }
                 .flatMapObservable { Observable.fromIterable(it) }
                 .doOnNext { it.versions = getPluginVersions(it) }
                 .observeOn(schedulersProvider.mainThread)
-                .subscribe({ it.loading = false },
+                .subscribe({  },
                     {
                         Timber.e(it)
                         onErrorLiveData.value = "Error loading update information: $it"
@@ -54,15 +55,7 @@ class ApkListViewModel(
         compositeDisposable.clear()
     }
 
-    fun onLoadingUpdated(loading: Boolean, plugin: Plugin) {
-        this.loading.value = loading
-        plugin.loading = loading
-    }
-
     fun onLoadingUpdated(loading: Boolean) {
         this.loading.value = loading
-        this.items.forEach {
-            it.loading = loading
-        }
     }
 }

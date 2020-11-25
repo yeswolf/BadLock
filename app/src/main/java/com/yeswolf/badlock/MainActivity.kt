@@ -12,7 +12,7 @@ import androidx.core.app.ActivityCompat
 import com.yeswolf.badlock.di.Scopes
 import com.yeswolf.badlock.receivers.DownloadResultReceiver
 import com.yeswolf.badlock.receivers.InstallResultReceiver
-import com.yeswolf.badlock.ui.MainList
+import com.yeswolf.badlock.ui.ApkList
 import com.yeswolf.badlock.ui.viewmodel.ApkListViewModel
 import com.yeswolf.badlock.ui.viewmodel.provideViewModel
 import toothpick.ktp.KTP
@@ -56,10 +56,9 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         })
-        viewModel.onLoadingUpdated(true)
 
         setContent {
-            MainList(items = viewModel.items, viewModel.loading, viewModel::onLoadingUpdated)
+            ApkList(viewModel = viewModel)
         }
 
     }

@@ -12,7 +12,6 @@ data class Plugin(
     val installedVersion: Version? = null
 ) {
     var versions: List<Version> = emptyList()
-    var loading = false
     val apkName: String
         get() {
             return "$name ${versions.first()}.apk"
