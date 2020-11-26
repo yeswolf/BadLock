@@ -3,7 +3,7 @@ package com.yeswolf.badlock.plugins.data
 import com.yeswolf.badlock.apkmirror.domain.Version
 
 data class Plugin(
-    val name: String,
+    var name: String,
     val serverRoot: String,
     val icon: Int = 0,
     val packageName: String = "",
@@ -16,6 +16,7 @@ data class Plugin(
         get() {
             return "$name ${versions.first()}.apk"
         }
+    var loading: Boolean = false
 
     val versionsLoaded: Boolean
         get() {

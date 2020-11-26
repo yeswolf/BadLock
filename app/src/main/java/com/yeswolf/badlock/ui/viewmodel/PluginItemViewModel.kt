@@ -1,6 +1,7 @@
 package com.yeswolf.badlock.ui.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import com.yeswolf.badlock.apkmirror.domain.GetPluginDownloadUrlUseCase
 import com.yeswolf.badlock.di.Scopes
@@ -26,7 +27,7 @@ class PluginItemViewModel(
     val name = plugin.name
     val installedVersion = "installed v.${plugin.installedVersion}"
     val hasInstalledVersion = plugin.installedVersion != null
-    var loading = mutableStateOf(false)
+    var loading = mutableStateOf(plugin.loading)
 
     init {
         KTP.openScope(Scopes.APP).inject(this)
@@ -63,16 +64,22 @@ class PluginItemViewModel(
         }
 
     fun onStartDownload() {
-        loading.value = true
+        updateLoading(true)
         compositeDisposable += getDownloadUrl(plugin = plugin)
             .observeOn(schedulersProvider.mainThread)
             .subscribe({
                 onStartDownload(plugin, it)
-                loading.value = false
+                updateLoading(false)
             }, {
                 Timber.e(it)
-                loading.value = false
+                updateLoading(false)
             })
+    }
+
+    private fun updateLoading(value: Boolean) {
+        loading.value = value
+        plugin.loading = value
+        //TODO: why the plugin.loading is not updated when loading.value is set?
     }
 
     override fun onCleared() {
