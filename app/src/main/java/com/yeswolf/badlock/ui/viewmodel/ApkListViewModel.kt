@@ -55,13 +55,17 @@ class ApkListViewModel(
                     })
         packageUpdates.startListen()
 
-        packageUpdates()
-            .observeOn(schedulersProvider.mainThread)
-            .doOnNext{ onLoadingUpdated(true) }
-            .observeOn(schedulersProvider.io)
-            .doOnNext { packageName -> items.firstOrNull { it.packageName == packageName }?.let { it.installedVersion = packageVersion(packageName = packageName) } }
-            .observeOn(schedulersProvider.mainThread)
-            .subscribe ({ onLoadingUpdated(false) }, Timber::e, {})
+        compositeDisposable +=
+            packageUpdates()
+                .observeOn(schedulersProvider.mainThread)
+                .doOnNext { onLoadingUpdated(true) }
+                .observeOn(schedulersProvider.io)
+                .doOnNext { packageName ->
+                    items.firstOrNull { it.packageName == packageName }
+                        ?.let { it.installedVersion = packageVersion(packageName = packageName) }
+                }
+                .observeOn(schedulersProvider.mainThread)
+                .subscribe({ onLoadingUpdated(false) }, Timber::e, {})
     }
 
 
