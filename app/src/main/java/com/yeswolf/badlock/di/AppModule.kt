@@ -1,11 +1,11 @@
 package com.yeswolf.badlock.di
 
 import android.content.Context
-import com.yeswolf.badlock.schedulers.ISchedulersProvider
-import com.yeswolf.badlock.schedulers.SchedulersProvider
 import com.yeswolf.badlock.packages.data.PackagesRepository
 import com.yeswolf.badlock.packages.domain.IPackagesRepository
 import com.yeswolf.badlock.packages.mappers.VersionMapper
+import com.yeswolf.badlock.schedulers.ISchedulersProvider
+import com.yeswolf.badlock.schedulers.SchedulersProvider
 import toothpick.config.Module
 import toothpick.ktp.binding.bind
 

@@ -1,7 +1,7 @@
 package com.yeswolf.badlock.apkmirror.data
 
-import com.yeswolf.badlock.plugins.data.Plugin
 import com.yeswolf.badlock.apkmirror.domain.Version
+import com.yeswolf.badlock.plugins.data.Plugin
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 

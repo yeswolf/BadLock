@@ -10,16 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
 import com.yeswolf.badlock.ui.viewmodel.PluginItemViewModel
 
 @Composable
 fun PluginItem(viewModel: PluginItemViewModel) {
-    val context = ContextAmbient.current
     Row(modifier = Modifier.clickable(onClick = {
-        viewModel.onPreferences(context)
+        viewModel.onPreferences()
     }).padding(10.dp).fillMaxWidth())
     {
         Column(modifier = Modifier.padding(5.dp)) {
@@ -42,7 +40,7 @@ fun PluginItem(viewModel: PluginItemViewModel) {
         ) {
             if (viewModel.showInstallUpdateButton) {
                 Button(enabled = !viewModel.loading.value, onClick = {
-                    viewModel.onDownload(context = context)
+                    viewModel.onStartDownload()
                 }) {
                     Text(viewModel.installUpdateButtonText)
                 }
