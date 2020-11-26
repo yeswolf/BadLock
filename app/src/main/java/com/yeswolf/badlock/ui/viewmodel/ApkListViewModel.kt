@@ -54,16 +54,14 @@ class ApkListViewModel(
                         onLoadingUpdated(false)
                     })
         packageUpdates.startListen()
-        packageUpdates().subscribe { packageName ->
-            onLoadingUpdated(true)
-            compositeDisposable +=
-                items.toObservable().filter { it.packageName == packageName }
-                    .map { it.installedVersion = packageVersion(packageName = packageName) }
-                    .doOnComplete { onLoadingUpdated(false) }
-                    .subscribeOn(schedulersProvider.io)
-                    .observeOn(schedulersProvider.mainThread)
-                    .subscribe()
-        }
+
+        packageUpdates()
+            .observeOn(schedulersProvider.mainThread)
+            .doOnNext{ onLoadingUpdated(true) }
+            .observeOn(schedulersProvider.io)
+            .doOnNext { packageName -> items.firstOrNull { it.packageName == packageName }?.let { it.installedVersion = packageVersion(packageName = packageName) } }
+            .observeOn(schedulersProvider.mainThread)
+            .subscribe ({ onLoadingUpdated(false) }, Timber::e, {})
     }
 
 
