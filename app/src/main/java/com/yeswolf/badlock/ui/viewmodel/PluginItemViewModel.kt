@@ -38,7 +38,7 @@ class PluginItemViewModel(
             val newVersion = plugin.versions.first()
             var text = ""
             if (plugin.installedVersion != null) {
-                if (newVersion.compareTo(plugin.installedVersion) == 1) {
+                if (newVersion.compareTo(plugin.installedVersion!!) == 1) {
                     text = "Update"
                 }
             } else {
@@ -54,7 +54,7 @@ class PluginItemViewModel(
             val newVersion = plugin.versions.first()
             var showButton = false
             if (plugin.installedVersion != null) {
-                if (newVersion.compareTo(plugin.installedVersion) == 1) {
+                if (newVersion.compareTo(plugin.installedVersion!!) == 1) {
                     showButton = true
                 }
             } else {

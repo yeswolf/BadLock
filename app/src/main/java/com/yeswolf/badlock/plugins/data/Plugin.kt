@@ -9,7 +9,7 @@ data class Plugin(
     val packageName: String = "",
     val className: String,
     val description: String = "",
-    val installedVersion: Version? = null
+    var installedVersion: Version? = null
 ) {
     var versions: List<Version> = emptyList()
     val apkName: String

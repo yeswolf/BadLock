@@ -11,7 +11,6 @@ import androidx.compose.ui.platform.setContent
 import androidx.core.app.ActivityCompat
 import com.yeswolf.badlock.di.Scopes
 import com.yeswolf.badlock.receivers.DownloadResultReceiver
-import com.yeswolf.badlock.receivers.InstallResultReceiver
 import com.yeswolf.badlock.ui.ApkList
 import com.yeswolf.badlock.ui.viewmodel.ApkListViewModel
 import com.yeswolf.badlock.ui.viewmodel.provideViewModel
@@ -38,16 +37,6 @@ class MainActivity : AppCompatActivity() {
             DownloadResultReceiver(viewModel),
             IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
         )
-        val filter = IntentFilter("android.intent.action.PACKAGE_INSTALL")
-        filter.addAction("android.intent.action.PACKAGE_ADDED")
-        filter.addAction("android.intent.action.PACKAGE_REMOVED")
-        filter.addDataScheme("package")
-        val installResultReceiver = InstallResultReceiver(viewModel)
-        applicationContext.registerReceiver(
-            installResultReceiver,
-            filter
-        )
-
 
         viewModel.onError.observe(this, {
             Toast.makeText(
