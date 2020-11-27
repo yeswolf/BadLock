@@ -18,4 +18,9 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Gradle
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --stacktrace
+    - name: Upload APK
+      uses: actions/upload-artifact@v1
+      with:
+        name: BadLock-${{ github.run_number }}
+        path: app/build/outputs/apk/debug/app-debug.apk 
