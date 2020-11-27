@@ -7,11 +7,9 @@ import org.jsoup.nodes.Document
 
 object ApkMirrorSource {
     private const val APK_MIRROR_URL = "https://www.apkmirror.com"
-    private const val SAMSUNG_CATEGORY = "samsung-electronics-co-ltd"
-    private const val VENDOR = "samsung"
 
     fun pluginURL(plugin: Plugin): String {
-        return "$APK_MIRROR_URL/apk/$SAMSUNG_CATEGORY/${plugin.serverRoot}"
+        return "$APK_MIRROR_URL/apk/${plugin.serverCompanyNameRoot}/${plugin.serverRoot}"
     }
 
     fun latestVersionHTMLDownloadURL(plugin: Plugin): String {
@@ -20,9 +18,9 @@ object ApkMirrorSource {
 
     fun versionHTMLDownloadURL(plugin: Plugin, version: Version): String {
         val versionPart = version.defised()
-        var url = "$APK_MIRROR_URL${version.url}"
-        if (plugin.serverRoot != "nice-catch" && plugin.serverRoot != "soundassistant" && plugin.serverRoot != "home-up" && plugin.serverRoot != "pentastic") {
-            url += "${VENDOR}-"
+        var url = "$APK_MIRROR_URL${version.url}${plugin.vendorToken}"
+        if (!plugin.vendorToken.isEmpty()){
+            url += "-"
         }
         url += "${
             plugin.serverRoot.replace(

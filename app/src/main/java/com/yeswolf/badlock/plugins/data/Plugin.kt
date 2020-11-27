@@ -4,6 +4,8 @@ import com.yeswolf.badlock.apkmirror.domain.Version
 
 data class Plugin(
     var name: String,
+    val serverCompanyNameRoot: String = "samsung-electronics-co-ltd",
+    val vendorToken: String = "samsung",
     val serverRoot: String,
     val icon: Int = 0,
     val packageName: String = "",
