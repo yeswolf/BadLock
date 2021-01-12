@@ -6,6 +6,31 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <queries>
+        <package android:name="com.samsung.systemui.lockstar" />
+        <package android:name="com.samsung.android.qstuner" />
+        <package android:name="com.samsung.android.pluginrecents" />
+        <package android:name="com.samsung.android.app.clockface" />
+        <package android:name="com.samsung.android.multistar" />
+        <package android:name="com.samsung.android.app.captureplugin" />
+        <package android:name="com.samsung.systemui.notilus" />
+        <package android:name="com.samsung.systemui.navillera" />
+        <package android:name="com.samsung.android.edgelightingeffectunit" />
+        <package android:name="com.samsung.android.sidegesturepad" />
+        <package android:name="com.samsung.android.app.edgetouch" />
+        <package android:name="com.samsung.android.app.goodcatch" />
+        <package android:name="com.samsung.android.soundassistant" />
+        <package android:name="com.samsung.android.themedesigner" />
+        <package android:name="com.samsung.android.app.homestar" />
+        <package android:name="com.samsung.android.pentastic" />
+        <package android:name="com.samsung.android.wonderland.wallpaper" />
+        <package android:name="com.samsung.android.keyscafe" />
+        <package android:name="com.android.samsung.icebox" />
+        <package android:name="com.android.samsung.batteryusage" />
+        <package android:name="com.samsung.android.statsd" />
+        <package android:name="com.samsung.android.appbooster" />
+    </queries>
+
     <application
         android:name=".App"
         android:requestLegacyExternalStorage="true"
