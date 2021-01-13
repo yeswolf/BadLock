@@ -1,7 +1,6 @@
 package com.yeswolf.badlock.ui.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import com.yeswolf.badlock.apkmirror.domain.GetPluginDownloadUrlUseCase
 import com.yeswolf.badlock.di.Scopes

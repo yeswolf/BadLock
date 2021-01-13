@@ -1,11 +1,11 @@
 package com.yeswolf.badlock.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +21,7 @@ fun PluginItem(viewModel: PluginItemViewModel) {
     }).padding(10.dp).fillMaxWidth())
     {
         Column(modifier = Modifier.padding(5.dp)) {
-            Image(asset = imageResource(id = viewModel.icon), modifier = Modifier.width(48.dp))
+            Image(imageResource(id = viewModel.icon), modifier = Modifier.width(48.dp))
         }
         Column(
             modifier = Modifier.padding(5.dp)

@@ -15,7 +15,6 @@ import com.yeswolf.badlock.schedulers.ISchedulersProvider
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.plusAssign
-import io.reactivex.rxjava3.kotlin.toObservable
 import timber.log.Timber
 import toothpick.InjectConstructor
 

@@ -19,7 +19,7 @@ object ApkMirrorSource {
     fun versionHTMLDownloadURL(plugin: Plugin, version: Version): String {
         val versionPart = version.defised()
         var url = "$APK_MIRROR_URL${version.url}${plugin.vendorToken}"
-        if (!plugin.vendorToken.isEmpty()){
+        if (plugin.vendorToken.isNotEmpty()){
             url += "-"
         }
         url += "${
